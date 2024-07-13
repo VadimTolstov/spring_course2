@@ -2,22 +2,38 @@
 <beans xmlns="http://www.springframework.org/schema/beans"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:util="http://www.springframework.org/schema/util"
        xsi:schemaLocation="http://www.springframework.org/schema/beans
- http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/context https://www.springframework.org/schema/context/spring-context.xsd">
+ http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/context https://www.springframework.org/schema/context/spring-context.xsd http://www.springframework.org/schema/util https://www.springframework.org/schema/util/spring-util.xsd">
 
-    <context:property-placeholder location="classpath:musicPlayer.properties"/> <!--показываем, где лежит файл musicPlayer.properties-->
+    <context:property-placeholder
+            location="classpath:musicPlayer.properties"/> <!--показываем, где лежит файл musicPlayer.properties-->
+
+    <bean id="rockMusicBean"
+          class="mail.tolstov.v.e.RockMusic">
+    </bean>
 
     <bean id="musicBean"
-          class="mail.tolstov.v.e.RockMusic">
+          class="mail.tolstov.v.e.ClassicalMusic">
+    </bean>
+
+    <bean id="someList" class="java.util.ArrayList">
+        <constructor-arg>
+            <list>
+                <ref bean="rockMusicBean"/>
+                <ref bean="musicBean"/>
+            </list>
+        </constructor-arg>
     </bean>
 
     <bean id="musicPlayer"
           class="mail.tolstov.v.e.MusicPlayer">
-        <property name="music" ref="musicBean"/> <!--внедрение бена через set-->
+        <property name="musicList" ref="someList"/> <!--внедрение бена через set-->
         <!--  <constructor-arg ref="musicBean"/> внедрение бена через конструктор-->
         <!--  <property name="name" value="Some name"/>  передаем значения в ручную через set-->
         <property name="name" value="${musicPlayer.name}"/>
-        <property name="volume" value="${musicPlayer.volume}"/> <!--передаем значения через файл musicPlayer.properties-->
+        <property name="volume"
+                  value="${musicPlayer.volume}"/> <!--передаем значения через файл musicPlayer.properties-->
     </bean>
 
 </beans>
