@@ -13,22 +13,33 @@
           class="mail.tolstov.v.e.RockMusic">
     </bean>
 
-    <bean id="musicBean"
+    <bean id="classicalMusic"
           class="mail.tolstov.v.e.ClassicalMusic">
     </bean>
 
-    <bean id="someList" class="java.util.ArrayList">
-        <constructor-arg>
-            <list>
-                <ref bean="rockMusicBean"/>
-                <ref bean="musicBean"/>
-            </list>
-        </constructor-arg>
+    <bean id="rapMusic"
+          class="mail.tolstov.v.e.RapMusic">
     </bean>
+    <!--можно так создать лист и передать в него данные -->
+    <!--    <bean id="someList" class="java.util.ArrayList">-->
+    <!--        <constructor-arg>-->
+    <!--            <list>-->
+    <!--                <ref bean="rockMusicBean"/>-->
+    <!--                <ref bean="classicalMusic"/>-->
+    <!--                <ref bean="rapMusic"/>-->
+    <!--            </list>-->
+    <!--        </constructor-arg>-->
+    <!--    </bean>-->
 
     <bean id="musicPlayer"
           class="mail.tolstov.v.e.MusicPlayer">
-        <property name="musicList" ref="someList"/> <!--внедрение бена через set-->
+        <property name="musicList" >
+            <list>
+                <ref bean="rockMusicBean"/>
+                <ref bean="classicalMusic"/>
+                <ref bean="rapMusic"/>
+            </list>
+        </property> <!--внедрение бена через set-->
         <!--  <constructor-arg ref="musicBean"/> внедрение бена через конструктор-->
         <!--  <property name="name" value="Some name"/>  передаем значения в ручную через set-->
         <property name="name" value="${musicPlayer.name}"/>
