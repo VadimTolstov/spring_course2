@@ -10,15 +10,20 @@
             location="classpath:musicPlayer.properties"/> <!--показываем, где лежит файл musicPlayer.properties-->
 
     <bean id="rockMusicBean"
-          class="mail.tolstov.v.e.RockMusic">
+          class="mail.tolstov.v.e.RockMusic" scope="prototype">
     </bean>
 
     <bean id="classicalMusic"
-          class="mail.tolstov.v.e.ClassicalMusic">
+          class="mail.tolstov.v.e.ClassicalMusic"
+          init-method="doMyInit"
+          destroy-method="doMyDestroy"
+          factory-method="getClassicalMusic">  <!--показываем Spring что объект должен создаться через фабричный метод-->
     </bean>
 
     <bean id="rapMusic"
-          class="mail.tolstov.v.e.RapMusic">
+          class="mail.tolstov.v.e.RapMusic" scope="prototype"
+          init-method="doMyInit"
+          destroy-method="doMyDestroy">
     </bean>
     <!--можно так создать лист и передать в него данные -->
     <!--    <bean id="someList" class="java.util.ArrayList">-->
@@ -32,14 +37,14 @@
     <!--    </bean>-->
 
     <bean id="musicPlayer"
-          class="mail.tolstov.v.e.MusicPlayer">
-        <property name="musicList" >
-            <list>
+          class="mail.tolstov.v.e.MusicPlayer" scope="prototype">
+        <property name="musicList"> <!--внедрение бена через set-->
+            <list>                  <!--передаем лист в set-->
                 <ref bean="rockMusicBean"/>
                 <ref bean="classicalMusic"/>
                 <ref bean="rapMusic"/>
             </list>
-        </property> <!--внедрение бена через set-->
+        </property>
         <!--  <constructor-arg ref="musicBean"/> внедрение бена через конструктор-->
         <!--  <property name="name" value="Some name"/>  передаем значения в ручную через set-->
         <property name="name" value="${musicPlayer.name}"/>

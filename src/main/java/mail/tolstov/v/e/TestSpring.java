@@ -11,6 +11,10 @@ public class TestSpring {
         musicPlayer.playMusic();
         System.out.println(musicPlayer.getName());
         System.out.println(musicPlayer.getVolume());
+        System.out.println("----------------------------------------------------------------------------------------------");
+        RapMusic rapMusic = context.getBean("rapMusic", RapMusic.class);
+        System.out.println("Пытаемся вызвать doMyDestroy у RapMusic");
+        ClassicalMusic classicalMusic =context.getBean(ClassicalMusic.class);
         context.close();
     }
 }
