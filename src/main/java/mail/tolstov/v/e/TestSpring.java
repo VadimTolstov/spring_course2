@@ -9,6 +9,8 @@ public class TestSpring {
         music.playMusic(GenreOfMusic.CLASSICAL);
         music.playMusic(GenreOfMusic.ROCK);
 
+        System.out.println(music.getName());
+        System.out.println(music.getVolume());
         context.close();
     }
 }

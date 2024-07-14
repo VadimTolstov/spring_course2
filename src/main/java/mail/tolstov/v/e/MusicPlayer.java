@@ -9,9 +9,9 @@ import java.util.Random;
 
 @Component
 public class MusicPlayer {
-    @Value(value = "${musicPlayer2.name}")
+    @Value(value = "${musicPlayer.name}")
     private String name;
-    @Value(value = "${musicPlayer2.volume}")
+    @Value(value = "${musicPlayer.volume}")
     private int volume;
     private Music music1;
     private Music music2;
