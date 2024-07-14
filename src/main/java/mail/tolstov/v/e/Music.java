@@ -1,5 +1,7 @@
 package mail.tolstov.v.e;
 
+import java.util.List;
+
 public interface Music {
-    String getSong();
+   List<String> getSong();
 }

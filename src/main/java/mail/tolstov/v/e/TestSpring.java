@@ -5,8 +5,9 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 public class TestSpring {
     public static void main(String[] args) {
         ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("applicationContext.xml");
-        Computer computer = context.getBean(Computer.class);
-        System.out.println(computer);
+        var music = context.getBean(MusicPlayer.class);
+        music.playMusic(GenreOfMusic.CLASSICAL);
+        music.playMusic(GenreOfMusic.ROCK);
 
         context.close();
     }
