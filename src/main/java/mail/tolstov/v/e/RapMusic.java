@@ -1,13 +1,8 @@
 package mail.tolstov.v.e;
 
-public class RapMusic implements Music{
-    public void doMyInit() {
-        System.out.println("Doing my initialization RapMusic scope=prototype not Destroy");
-    }
+import org.springframework.stereotype.Component;
 
-    public void doMyDestroy() {
-        System.out.println("Doing my destruction RapMusic");
-    }
+public class RapMusic implements Music {
     @Override
     public String getSong() {
         return "99 problems";
