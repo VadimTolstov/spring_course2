@@ -1,9 +1,9 @@
 package mail.tolstov.v.e;
 
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.ComponentScan;
-import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.PropertySource;
+import org.springframework.context.annotation.*;
+
+import java.util.Arrays;
+import java.util.List;
 
 @Configuration
 //@ComponentScan("mail.tolstov.v.e")
@@ -11,16 +11,31 @@ import org.springframework.context.annotation.PropertySource;
 public class SpringConfig {
 
     @Bean
-    public ClassicalMusic classicalMusic(){
+    @Scope("prototype")
+    public ClassicalMusic classicalMusic() {
         return new ClassicalMusic();
     }
 
     @Bean
-    public RockMusic rockMusic(){
+    public RockMusic rockMusic() {
         return new RockMusic();
     }
+
     @Bean
-    public MusicPlayer musicPlayer(){
-        return new MusicPlayer(rockMusic(), classicalMusic());
+    public RapMusic rapMusic() {
+        return new RapMusic();
     }
+
+    @Bean
+    public MusicPlayer musicPlayer() {
+        return new MusicPlayer(List.of(new RapMusic(), new RockMusic(), new ClassicalMusic()));
+    }
+
+    //можно так создать лист для решения
+    @Bean
+    public List<Music> musicList() {
+        // Этот лист неизменяемый (immutable)
+        return Arrays.asList(classicalMusic(), rockMusic(), rapMusic());
+    }
+
 }

@@ -6,8 +6,7 @@ public class TestSpring {
     public static void main(String[] args) {
         AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext(SpringConfig.class);
         var music = context.getBean(MusicPlayer.class);
-        music.playMusic(GenreOfMusic.CLASSICAL);
-        music.playMusic(GenreOfMusic.ROCK);
+        music.playMusic();
 
         System.out.println(music.getName());
         System.out.println(music.getVolume());
