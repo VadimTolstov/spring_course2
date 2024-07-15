@@ -7,7 +7,7 @@ import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
 import java.util.List;
 
-@Component
+//@Component
 @Scope("singleton")
 public class ClassicalMusic implements Music {
     @PostConstruct
